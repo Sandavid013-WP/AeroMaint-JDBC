@@ -2,6 +2,7 @@ package com.aeromaint.dao;
 
 import com.aeromaint.config.DatabaseConnection;
 import com.aeromaint.model.Aeronave;
+import com.aeromaint.validation.AeronaveValidator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,9 @@ import java.util.List;
 public class AeronaveDAO {
 
     public void insertarAeronave(Aeronave aeronave) throws SQLException {
+    
+
+     AeronaveValidator.validar(aeronave);
 
         String sql = "INSERT INTO aeronave " +
                      "(matricula, modelo, fabricante, numero_serie, ciclos, estado) " +
@@ -69,6 +73,8 @@ try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
     }
 
     public void actualizarAeronave(Aeronave aeronave) throws SQLException {
+
+    AeronaveValidator.validar(aeronave);
 
         String sql = "UPDATE aeronave SET " +
                      "matricula = ?, modelo = ?, fabricante = ?, " +
